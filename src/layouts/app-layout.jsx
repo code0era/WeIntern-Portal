@@ -3,12 +3,13 @@ import { Outlet } from 'react-router-dom';
 
 const AppLayout = () => {
   return <div>
-    <div className='grid-background'></div>
-    <main className='min-h-screen container'>
-      <Header/>
+    <main >
+      <Header />
       <Outlet />
     </main>
-    <div className='p-8 text-center bg-gray-800 mt-8'>All rights are reserved, Copyright © 2025 WeIntern® </div>
+    <footer className="fixed bottom-0 left-0 w-full text-center py-6 text-sm text-white bg-sky-900 border-t border-sky-200 z-50">
+      © 2025 <span className="font-semibold">WeIntern®</span>. All rights reserved.
+    </footer>
   </div>;
 }
 

@@ -1,47 +1,34 @@
 /* eslint-disable react/prop-types */
 import { createContext, useContext, useEffect, useState } from "react";
 
-const initialState = {
-    theme: "system",
+const ThemeProviderContext = createContext({
+    theme: "light",
     setTheme: () => null,
-};
-
-const ThemeProviderContext = createContext(initialState);
+});
 
 export function ThemeProvider({
     children,
-    defaultTheme = "system",
     storageKey = "vite-ui-theme",
     ...props
 }) {
-    const [theme, setTheme] = useState(
-        () => localStorage.getItem(storageKey) || defaultTheme
-    );
+    const [theme] = useState("light"); // 🔒 locked to light
 
     useEffect(() => {
         const root = window.document.documentElement;
 
-        root.classList.remove("light", "dark");
+        // remove any dark/system classes
+        root.classList.remove("dark", "system");
 
-        if (theme === "system") {
-            const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-                .matches
-                ? "dark"
-                : "light";
+        // always apply light
+        root.classList.add("light");
 
-            root.classList.add(systemTheme);
-            return;
-        }
-
-        root.classList.add(theme);
-    }, [theme]);
+        // force-save light theme
+        localStorage.setItem(storageKey, "light");
+    }, []);
 
     const value = {
-        theme,
-        setTheme: (theme) => {
-            localStorage.setItem(storageKey, theme);
-            setTheme(theme);
-        },
+        theme: "light",
+        setTheme: () => { }, // disabled
     };
 
     return (
@@ -53,9 +40,8 @@ export function ThemeProvider({
 
 export const useTheme = () => {
     const context = useContext(ThemeProviderContext);
-
-    if (context === undefined)
+    if (!context) {
         throw new Error("useTheme must be used within a ThemeProvider");
-
+    }
     return context;
 };
