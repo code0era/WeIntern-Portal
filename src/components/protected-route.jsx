@@ -6,22 +6,16 @@ const ProtectedRoute = ({ children }) => {
     const { isSignedIn, isLoaded, user } = useUser();
     const { pathname } = useLocation();
 
-    // ⏳ Wait until Clerk is fully loaded
-    if (!isLoaded) return null;
-
-    // 🔒 Not signed in → redirect to sign-in
-    if (!isSignedIn) {
-        return <Navigate to="/?sign-in=true" replace />;
+    if (isLoaded && !isSignedIn && isSignedIn !== undefined) {
+        return <Navigate to="/?sign-in=true" />;
     }
 
-    // 🧭 Signed in but role not selected → onboarding
     if (
-        isSignedIn &&
+        user !== undefined &&
         !user?.unsafeMetadata?.role &&
         pathname !== "/onboarding"
-    ) {
-        return <Navigate to="/onboarding" replace />;
-    }
+    )
+        return <Navigate to="/onboarding" />;
 
     return children;
 };
