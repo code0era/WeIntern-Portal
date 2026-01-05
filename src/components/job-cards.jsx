@@ -10,12 +10,15 @@ import {
 } from "./ui/card";
 import { Link } from "react-router-dom";
 import useFetch from "@/hooks/use-fetch";
-import { deleteJob, saveJob } from "@/api/apiJobs";
+import {  saveJob } from "@/api/apiJobs";
 import { useUser } from "@clerk/clerk-react";
 import { useEffect, useState } from "react";
 import { BarLoader } from "react-spinners";
 
-const JobCard = ({
+
+
+
+const jobCard = ({
     job,
     savedInit = false,
     onJobAction = () => { },
@@ -25,15 +28,17 @@ const JobCard = ({
 
     const { user } = useUser();
 
-    const { loading: loadingDeleteJob, fn: fnDeleteJob } = useFetch(deleteJob, {
-        job_id: job.id,
-    });
+    // const { loading: loadingDeleteJob, fn: fnDeleteJob } = useFetch(deleteJob, {
+    //     job_id: job.id,
+    // });
 
     const {
         loading: loadingSavedJob,
         data: savedJob,
         fn: fnSavedJob,
-    } = useFetch(saveJob);
+    } = useFetch(saveJob,{
+        alreadySaved:saved,
+    });
 
     const handleSaveJob = async () => {
         await fnSavedJob({
@@ -53,19 +58,16 @@ const JobCard = ({
     }, [savedJob]);
 
     return (
-        <Card className="flex flex-col">
-            {loadingDeleteJob && (
-                <BarLoader className="mt-4" width={"100%"} color="#36d7b7" />
-            )}
-            <CardHeader className="flex">
-                <CardTitle className="flex justify-between font-bold">
+        <Card>
+            <CardHeader>
+                <CardTitle>
                     {job.title}
                     {isMyJob && (
                         <Trash2Icon
                             fill="red"
                             size={18}
                             className="text-red-300 cursor-pointer"
-                            onClick={handleDeleteJob}
+                        // onClick={handleDeleteJob}
                         />
                     )}
                 </CardTitle>
@@ -86,6 +88,7 @@ const JobCard = ({
                         More Details
                     </Button>
                 </Link>
+
                 {!isMyJob && (
                     <Button
                         variant="outline"
@@ -102,7 +105,7 @@ const JobCard = ({
                 )}
             </CardFooter>
         </Card>
-    );
-};
+    )
+}
 
-export default JobCard;
+export default jobCard
