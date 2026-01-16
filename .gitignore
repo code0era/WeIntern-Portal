@@ -11,7 +11,9 @@ node_modules
 dist
 dist-ssr
 *.local
-
+SureSORT\client\node_modules
+SureSORT\server\node_modules
+WeIntern-Portal\node_modules
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
