@@ -19,9 +19,17 @@ https://weinternportal.vercel.app/
 <img width="1920" height="1020" alt="Screenshot 2026-01-18 165722" src="https://github.com/user-attachments/assets/2f6e4db3-5649-4630-88c9-714b3da5a957" />
 <img width="1920" height="1020" alt="Screenshot 2026-01-18 165801" src="https://github.com/user-attachments/assets/66d50a55-3fd2-423f-9c2d-95e567375d73" />
 <img width="1920" height="1020" alt="Screenshot 2026-01-18 165614" src="https://github.com/user-attachments/assets/0ad6f73c-1adb-491c-a258-4a7331218970" />
+<img width="1920" height="1020" alt="Screenshot 2026-01-18 173522" src="https://github.com/user-attachments/assets/22dca0d1-19f8-4ec5-94d2-3a7af130f55a" />
+
+<img width="1920" height="1020" alt="Screenshot 2026-01-18 173454" src="https://github.com/user-attachments/assets/bef9ce96-86de-406b-bef3-fe5bd3d6ca6f" />
+<img width="1920" height="1020" alt="Screenshot 2026-01-18 173522" src="https://github.com/user-attachments/assets/faf92d4b-c2d1-4693-8dc3-956e10593384" />
+<img width="1920" height="1020" alt="Screenshot 2026-01-18 173443" src="https://github.com/user-attachments/assets/ce737e8b-edd4-4a49-9091-939903f55b9b" />
 
 
-## 🛠 1. Tech Stack
+<img width="1920" height="1020" alt="Screenshot 2026-01-18 173454" src="https://github.com/user-attachments/assets/47cfdfd5-2fdc-4c3d-bf16-e226dc60b96d" />
+<img width="1920" height="1020" alt="Screenshot 2026-01-18 173522" src="https://github.com/user-attachments/assets/70370061-376e-4da1-a00e-25a222d3ad68" />
+ 
+ 1. Tech Stack
 
 * **Frontend:** [React.js](https://react.dev/) (Vite) for a fast, component-based UI.
 * **Styling:** [Tailwind CSS](https://tailwindcss.com/) for custom utility-first design.
