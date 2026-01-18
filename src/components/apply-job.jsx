@@ -76,18 +76,25 @@ export function ApplyJobDrawer({ user, job, fetchJob, applied = false }) {
             <DrawerTrigger asChild>
                 <Button
                     size="lg"
-                    variant={job?.isOpen && !applied ? "blue" : "destructive"}
+                    // Keep destructive for 'Hiring Closed' to warn users, but use Sky Blue for 'Apply'
+                    className={
+                        job?.isOpen && !applied
+                            ? "bg-sky-500 hover:bg-sky-600 text-white"
+                            : "bg-red-500 hover:bg-red-600 text-white"
+                    }
                     disabled={!job?.isOpen || applied}
                 >
                     {job?.isOpen ? (applied ? "Applied" : "Apply") : "Hiring Closed"}
                 </Button>
             </DrawerTrigger>
-            <DrawerContent>
+            <DrawerContent className="bg-white">
                 <DrawerHeader>
-                    <DrawerTitle>
+                    <DrawerTitle className="text-slate-900">
                         Apply for {job?.title} at {job?.company?.name}
                     </DrawerTitle>
-                    <DrawerDescription>Please Fill the form below</DrawerDescription>
+                    <DrawerDescription className="text-slate-600">
+                        Please fill the form below
+                    </DrawerDescription>
                 </DrawerHeader>
 
                 <form
@@ -97,7 +104,7 @@ export function ApplyJobDrawer({ user, job, fetchJob, applied = false }) {
                     <Input
                         type="number"
                         placeholder="Years of Experience"
-                        className="flex-1"
+                        className="flex-1 bg-white border-sky-300 text-slate-900 focus-visible:ring-sky-500 placeholder:text-slate-400"
                         {...register("experience", {
                             valueAsNumber: true,
                         })}
@@ -105,30 +112,32 @@ export function ApplyJobDrawer({ user, job, fetchJob, applied = false }) {
                     {errors.experience && (
                         <p className="text-red-500">{errors.experience.message}</p>
                     )}
+
                     <Input
                         type="text"
                         placeholder="Skills (Comma Separated)"
-                        className="flex-1"
+                        className="flex-1 bg-white border-sky-300 text-slate-900 focus-visible:ring-sky-500 placeholder:text-slate-400"
                         {...register("skills")}
                     />
                     {errors.skills && (
                         <p className="text-red-500">{errors.skills.message}</p>
                     )}
+
                     <Controller
                         name="education"
                         control={control}
                         render={({ field }) => (
-                            <RadioGroup onValueChange={field.onChange} {...field}>
+                            <RadioGroup onValueChange={field.onChange} {...field} className="text-slate-700">
                                 <div className="flex items-center space-x-2">
-                                    <RadioGroupItem value="Intermediate" id="intermediate" />
+                                    <RadioGroupItem value="Intermediate" id="intermediate" className="border-sky-400 text-sky-600" />
                                     <Label htmlFor="intermediate">Intermediate</Label>
                                 </div>
                                 <div className="flex items-center space-x-2">
-                                    <RadioGroupItem value="Graduate" id="graduate" />
+                                    <RadioGroupItem value="Graduate" id="graduate" className="border-sky-400 text-sky-600" />
                                     <Label htmlFor="graduate">Graduate</Label>
                                 </div>
                                 <div className="flex items-center space-x-2">
-                                    <RadioGroupItem value="Post Graduate" id="post-graduate" />
+                                    <RadioGroupItem value="Post Graduate" id="post-graduate" className="border-sky-400 text-sky-600" />
                                     <Label htmlFor="post-graduate">Post Graduate</Label>
                                 </div>
                             </RadioGroup>
@@ -137,10 +146,11 @@ export function ApplyJobDrawer({ user, job, fetchJob, applied = false }) {
                     {errors.education && (
                         <p className="text-red-500">{errors.education.message}</p>
                     )}
+
                     <Input
                         type="file"
                         accept=".pdf, .doc, .docx"
-                        className="flex-1 file:text-gray-500"
+                        className="flex-1 file:text-sky-700 border-sky-300 text-slate-700 bg-white"
                         {...register("resume")}
                     />
                     {errors.resume && (
@@ -149,15 +159,21 @@ export function ApplyJobDrawer({ user, job, fetchJob, applied = false }) {
                     {errorApply?.message && (
                         <p className="text-red-500">{errorApply?.message}</p>
                     )}
-                    {loadingApply && <BarLoader width={"100%"} color="#36d7b7" />}
-                    <Button type="submit" variant="blue" size="lg">
+
+                    {loadingApply && <BarLoader width={"100%"} color="#0ea5e9" />}
+
+                    <Button
+                        type="submit"
+                        size="lg"
+                        className="bg-sky-500 hover:bg-sky-600 text-white"
+                    >
                         Apply
                     </Button>
                 </form>
 
                 <DrawerFooter>
                     <DrawerClose asChild>
-                        <Button variant="outline">Cancel</Button>
+                        <Button variant="outline" className="border-sky-200 text-sky-700 hover:bg-sky-50">Cancel</Button>
                     </DrawerClose>
                 </DrawerFooter>
             </DrawerContent>
