@@ -24,7 +24,7 @@ const CreatedJobs = () => {
     return (
         <div>
             {loadingCreatedJobs ? (
-                <BarLoader className="mt-4" width={"100%"} color="#36d7b7" />
+                <BarLoader className="mt-4" width={"100%"} color="#0ea5e9" />
             ) : (
                 <div className="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {createdJobs?.length ? (
@@ -39,7 +39,9 @@ const CreatedJobs = () => {
                             );
                         })
                     ) : (
-                        <div>No Jobs Found 😢</div>
+                        <div className="text-slate-600 text-center col-span-full text-xl font-medium">
+                            No Jobs Found 😢
+                        </div>
                     )}
                 </div>
             )}
