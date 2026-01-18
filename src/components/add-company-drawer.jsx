@@ -63,24 +63,33 @@ const AddCompanyDrawer = ({ fetchCompanies }) => {
 
   return (
     <Drawer>
-      <DrawerTrigger>
-        <Button type="button" size="sm" variant="secondary">
+      <DrawerTrigger asChild>
+        <Button
+          type="button"
+          size="sm"
+          variant="secondary"
+          className="bg-sky-100 hover:bg-sky-200 text-sky-900 border border-sky-200"
+        >
           Add Company
         </Button>
       </DrawerTrigger>
-      <DrawerContent>
+      <DrawerContent className="bg-white">
         <DrawerHeader>
-          <DrawerTitle>Add a New Company</DrawerTitle>
+          <DrawerTitle className="text-slate-900">Add a New Company</DrawerTitle>
         </DrawerHeader>
         <form className="flex gap-2 p-4 pb-0">
           {/* Company Name */}
-          <Input placeholder="Company name" {...register("name")} />
+          <Input
+            placeholder="Company name"
+            {...register("name")}
+            className="bg-white border-sky-300 text-slate-900 focus-visible:ring-sky-500"
+          />
 
           {/* Company Logo */}
           <Input
             type="file"
             accept="image/*"
-            className=" file:text-gray-500"
+            className="file:text-sky-700 border-sky-300 text-slate-700 bg-white"
             {...register("logo")}
           />
 
@@ -88,8 +97,7 @@ const AddCompanyDrawer = ({ fetchCompanies }) => {
           <Button
             type="button"
             onClick={handleSubmit(onSubmit)}
-            variant="destructive"
-            className="w-40"
+            className="w-40 bg-sky-500 hover:bg-sky-600 text-white"
           >
             Add
           </Button>
@@ -100,9 +108,13 @@ const AddCompanyDrawer = ({ fetchCompanies }) => {
           {errorAddCompany?.message && (
             <p className="text-red-500">{errorAddCompany?.message}</p>
           )}
-          {loadingAddCompany && <BarLoader width={"100%"} color="#36d7b7" />}
+          {loadingAddCompany && <BarLoader width={"100%"} color="#0ea5e9" />}
           <DrawerClose asChild>
-            <Button type="button" variant="secondary">
+            <Button
+              type="button"
+              variant="secondary"
+              className="bg-slate-100 hover:bg-slate-200 text-slate-700"
+            >
               Cancel
             </Button>
           </DrawerClose>
