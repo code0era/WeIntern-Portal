@@ -79,7 +79,7 @@ const PostJob = () => {
   }, [isLoaded]);
 
   if (!isLoaded || loadingCompanies) {
-    return <BarLoader className="mb-4" width={"100%"} color="#36d7b7" />;
+    return <BarLoader className="mb-4" width={"100%"} color="#0ea5e9" />;
   }
 
   if (user?.unsafeMetadata?.role !== "recruiter") {
@@ -87,18 +87,26 @@ const PostJob = () => {
   }
 
   return (
-    <div>
-      <h1 className="gradient-title font-extrabold text-5xl sm:text-7xl text-center pb-8">
+    <div className="min-h-screen bg-sky-100 p-8">
+      <h1 className="font-extrabold text-5xl sm:text-7xl text-center pb-8 text-slate-900">
         Post a Job
       </h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-4 p-4 pb-0"
+        className="flex flex-col gap-4 p-4 pb-0 max-w-5xl mx-auto"
       >
-        <Input placeholder="Job Title" {...register("title")} />
+        <Input
+          placeholder="Job Title"
+          {...register("title")}
+          className="bg-white border-sky-300 text-slate-900 placeholder:text-slate-400 focus-visible:ring-sky-500"
+        />
         {errors.title && <p className="text-red-500">{errors.title.message}</p>}
 
-        <Textarea placeholder="Job Description" {...register("description")} />
+        <Textarea
+          placeholder="Job Description"
+          {...register("description")}
+          className="bg-white border-sky-300 text-slate-900 placeholder:text-slate-400 focus-visible:ring-sky-500"
+        />
         {errors.description && (
           <p className="text-red-500">{errors.description.message}</p>
         )}
@@ -109,13 +117,13 @@ const PostJob = () => {
             control={control}
             render={({ field }) => (
               <Select value={field.value} onValueChange={field.onChange}>
-                <SelectTrigger>
+                <SelectTrigger className="bg-white border-sky-300 text-slate-900 focus:ring-sky-500">
                   <SelectValue placeholder="Job Location" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-white border-sky-200">
                   <SelectGroup>
                     {State.getStatesOfCountry("IN").map(({ name }) => (
-                      <SelectItem key={name} value={name}>
+                      <SelectItem key={name} value={name} className="hover:bg-sky-100 cursor-pointer">
                         {name}
                       </SelectItem>
                     ))}
@@ -129,7 +137,7 @@ const PostJob = () => {
             control={control}
             render={({ field }) => (
               <Select value={field.value} onValueChange={field.onChange}>
-                <SelectTrigger>
+                <SelectTrigger className="bg-white border-sky-300 text-slate-900 focus:ring-sky-500">
                   <SelectValue placeholder="Company">
                     {field.value
                       ? companies?.find((com) => com.id === Number(field.value))
@@ -137,10 +145,10 @@ const PostJob = () => {
                       : "Company"}
                   </SelectValue>
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-white border-sky-200">
                   <SelectGroup>
                     {companies?.map(({ name, id }) => (
-                      <SelectItem key={name} value={id}>
+                      <SelectItem key={name} value={id} className="hover:bg-sky-100 cursor-pointer">
                         {name}
                       </SelectItem>
                     ))}
@@ -162,7 +170,15 @@ const PostJob = () => {
           name="requirements"
           control={control}
           render={({ field }) => (
-            <MDEditor value={field.value} onChange={field.onChange} />
+            <div data-color-mode="light">
+              <MDEditor
+                value={field.value}
+                onChange={field.onChange}
+                preview="edit"
+                height={300}
+                className="border-sky-300 shadow-sm"
+              />
+            </div>
           )}
         />
         {errors.requirements && (
@@ -174,8 +190,12 @@ const PostJob = () => {
         {errorCreateJob?.message && (
           <p className="text-red-500">{errorCreateJob?.message}</p>
         )}
-        {loadingCreateJob && <BarLoader width={"100%"} color="#36d7b7" />}
-        <Button type="submit" variant="blue" size="lg" className="mt-2">
+        {loadingCreateJob && <BarLoader width={"100%"} color="#0ea5e9" />}
+        <Button
+          type="submit"
+          size="lg"
+          className="mt-2 bg-sky-500 hover:bg-sky-600 text-white"
+        >
           Submit
         </Button>
       </form>
