@@ -1,16 +1,151 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+# 🚀 WeIntern - Professional Internship & Job Portal
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**WeIntern** is a streamlined, responsive job portal platform designed to connect ambitious interns and job seekers with top-tier employers. Featuring a clean, modern **Sky Blue & White** aesthetic, the application provides a seamless experience for managing the entire hiring lifecycle.
 
-## React Compiler
+# Some Working SS:
+<img width="1920" height="1020" alt="Screenshot 2026-01-18 165656" src="https://github.com/user-attachments/assets/6fefd633-ab82-4adb-8d90-13bbfcc604d0" />
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
+<img width="1920" height="1020" alt="Screenshot 2026-01-18 165704" src="https://github.com/user-attachments/assets/8eb3675d-4db7-408a-aa60-1640e7f04acd" />
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+<img width="1920" height="1020" alt="Screenshot 2026-01-18 165722" src="https://github.com/user-attachments/assets/2f6e4db3-5649-4630-88c9-714b3da5a957" />
+<img width="1920" height="1020" alt="Screenshot 2026-01-18 165801" src="https://github.com/user-attachments/assets/66d50a55-3fd2-423f-9c2d-95e567375d73" />
+<img width="1920" height="1020" alt="Screenshot 2026-01-18 165614" src="https://github.com/user-attachments/assets/0ad6f73c-1adb-491c-a258-4a7331218970" />
+
+
+## 🛠 1. Tech Stack
+
+* **Frontend:** [React.js](https://react.dev/) (Vite) for a fast, component-based UI.
+* **Styling:** [Tailwind CSS](https://tailwindcss.com/) for custom utility-first design.
+* **UI Components:** [Shadcn UI](https://ui.shadcn.com/) (Cards, Drawers, Buttons, Selects, Accordions).
+* **Authentication:** [Clerk](https://clerk.com/) for secure role-based access control.
+* **Backend & Database:** [Supabase](https://supabase.com/) for real-time data and authentication persistence.
+* **Form Management:** React Hook Form with Zod validation.
+* **Icons:** Lucide React.
+* **Editor:** UIW React MD Editor for rich text job requirements.
+
+---
+
+## ✨ 2. Core Functionalities
+
+### **A. For Job Seekers (Candidates)**
+
+* **Job Discovery:** Search through thousands of internships using titles, locations, and company filters.
+* **Save for Later:** Bookmark interesting opportunities to a dedicated "Saved Jobs" list.
+* **Application Tracking:** Monitor the progress of your applications in real-time (Applied, Interviewing, Hired, or Rejected).
+* **Detailed Insights:** View comprehensive job requirements and company details before applying.
+
+### **B. For Employers (Recruiters)**
+
+* **Company Branding:** Register your company and upload logos to build trust with candidates.
+* **Job Lifecycle Management:** Post new listings, edit existing ones, or close hiring when a position is filled.
+* **Candidate Management:** Access a centralized dashboard to review applicants, download resumes, and check candidate qualifications (Skills, Education, Experience).
+* **Workflow Automation:** Update application statuses with a single click to keep candidates informed.
+
+---
+
+## 🎨 3. Design & Theme: "The Sky Blue Aesthetic"
+
+The application has been unified under a professional **Sky Blue / Light Blue / White** palette to ensure a calm yet productive user experience.
+
+| Element | Palette/Style |
+| --- | --- |
+| **Primary Background** | `bg-sky-100` (Light, airy feel) |
+| **Navigation** | `bg-white/80` with `backdrop-blur` |
+| **Action Buttons** | `bg-sky-500` to `bg-sky-700` |
+| **Cards & Drawers** | White with `border-sky-200` and subtle shadows |
+| **Typography** | `text-slate-900` (Headers) and `text-slate-700` (Body) |
+
+---
+
+## 🐛 4. Critical Logic Fixes
+
+### **The Description Parsing Bug**
+
+A previous version of the `JobCard` component failed to display descriptions if they did not contain a period (`.`).
+
+**The Problem:**
+
+```javascript
+// Resulted in "." only if no dot was found in the text
+job.description.substring(0, job.description.indexOf("."))
+
+```
+
+**The Solution:**
+The logic was updated to check for the existence of a period and provide a fallback truncation length (80 characters) to ensure the card always displays readable content regardless of how the recruiter enters the data.
+
+---
+
+## 📖 5. User Guides
+
+### **For Recruiters: How to Post & Manage**
+
+1. **Onboarding:** Sign in and select **Recruiter**.
+2. **Add Company:** In the "Post Job" section, use the **Add Company Drawer** to register your firm if it doesn't exist.
+3. **Posting:** Fill in the title and description. Use the **Markdown Editor** for clear, bulleted requirements.
+4. **Managing:** Navigate to **"My Jobs"**. Click a card to see all applicants. Use the status dropdown to move candidates through your hiring pipeline.
+
+### **For Candidates: How to Apply**
+
+1. **Discovery:** Use the filters on the **Jobs Listing** page to find relevant roles.
+2. **Application:** Click **"More Details"** and then **"Apply"**.
+3. **Resume Upload:** Fill in your years of experience, skills, and upload your resume (PDF/DOC).
+4. **Follow Up:** Check **"My Applications"** periodically to see status updates from employers.
+
+---
+
+## 📂 6. Project Structure
+
+```bash
+/src
+  /api             # Supabase data fetching logic
+  /components      # Reusable UI (JobCards, Header, Footer)
+  /data            # Static JSON for FAQs and Companies
+  /hooks           # Custom useFetch hook for API states
+  /pages           # Main views (Landing, Listing, Post Job, Onboarding)
+  /layouts         # AppLayout managing Flexbox and Sticky components
+
+```
+
+---
+
+## ⚙️ 7. Installation & Setup
+
+1. **Clone the repo:**
+```bash
+git clone https://github.com/yourusername/weintern.git
+
+```
+
+
+2. **Install dependencies:**
+```bash
+npm install
+
+```
+
+
+3. **Environment Variables:** Create a `.env` file with your **Clerk** and **Supabase** credentials:
+```env
+VITE_CLERK_PUBLISHABLE_KEY=your_key
+VITE_SUPABASE_URL=your_url
+VITE_SUPABASE_ANON_KEY=your_key
+
+```
+
+
+4. **Start the development server:**
+```bash
+npm run dev
+
+```
+
+
+
+---
+
+**Would you like me to create a specific `CONTRIBUTING.md` file for you, or do you need help setting up the Supabase database schema for this project?**
