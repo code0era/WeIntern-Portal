@@ -22,12 +22,12 @@ const SavedJobs = () => {
   }, [isLoaded]);
 
   if (!isLoaded || loadingSavedJobs) {
-    return <BarLoader className="mb-4" width={"100%"} color="#36d7b7" />;
+    return <BarLoader className="mb-4" width={"100%"} color="#0ea5e9" />;
   }
 
   return (
-    <div>
-      <h1 className="gradient-title font-extrabold text-6xl sm:text-7xl text-center pb-8">
+    <div className="min-h-screen bg-sky-100 p-8">
+      <h1 className="font-extrabold text-6xl sm:text-7xl text-center pb-8 text-slate-900">
         Saved Jobs
       </h1>
 
@@ -45,7 +45,9 @@ const SavedJobs = () => {
               );
             })
           ) : (
-            <div>No Saved Jobs 👀</div>
+            <div className="text-slate-600 text-center col-span-full text-xl font-medium">
+              No Saved Jobs 👀
+            </div>
           )}
         </div>
       )}
