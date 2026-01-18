@@ -7,7 +7,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { State } from "country-state-city";
 
-
 import {
   Select,
   SelectContent,
@@ -38,7 +37,7 @@ const JobListing = () => {
     loading: loadingJobs,
     error,
   } = useFetch(getJobs, {
-    location, 
+    location,
     company_id,
     searchQuery,
   });
@@ -49,15 +48,11 @@ const JobListing = () => {
     }
   }, [isLoaded]);
 
-
   useEffect(() => {
     if (isLoaded) {
       fnJobs();
     }
-  }, [isLoaded, location,
-    company_id,
-    searchQuery,]);
-
+  }, [isLoaded, location, company_id, searchQuery]);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -73,17 +68,17 @@ const JobListing = () => {
     setLocation("");
   };
 
-
   if (!isLoaded) {
-    return <BarLoader className="mb-4" width={"100%"} color="#36d7b7" />;
+    return <BarLoader className="mb-4" width={"100%"} color="#0ea5e9" />;
   }
 
   return (
-    <div>
-      <h1 className="gradient-title font-extrabold text-6xl sm:text-7xl text-center pb-8">
+    <div className="min-h-screen bg-sky-100 p-8">
+      <h1 className="font-extrabold text-6xl sm:text-7xl text-center pb-8 text-slate-900">
         Latest Jobs
       </h1>
-      {/* Add  filter  */}
+
+      {/* Add filter */}
       <form
         onSubmit={handleSearch}
         className="h-14 flex flex-row w-full gap-2 items-center mb-3"
@@ -92,24 +87,27 @@ const JobListing = () => {
           type="text"
           placeholder="Search Jobs by Title.."
           name="search-query"
-          className="h-full flex-1  px-4 text-md"
+          className="h-full flex-1 px-4 text-md bg-white border-sky-300 text-slate-900 placeholder:text-slate-400 focus-visible:ring-sky-500"
         />
-        <Button type="submit" className="h-full sm:w-28" variant="blue">
+        <Button
+          type="submit"
+          className="h-full sm:w-28 bg-sky-500 hover:bg-sky-600 text-white"
+        >
           Search
         </Button>
       </form>
 
-{/*  clearing */}
+      {/* clearing */}
       <div className="flex flex-col sm:flex-row gap-2">
         <Select value={location} onValueChange={(value) => setLocation(value)}>
-          <SelectTrigger>
+          <SelectTrigger className="bg-white border-sky-300 text-slate-900 focus:ring-sky-500">
             <SelectValue placeholder="Filter by Location" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="bg-white border-sky-200">
             <SelectGroup>
               {State.getStatesOfCountry("IN").map(({ name }) => {
                 return (
-                  <SelectItem key={name} value={name}>
+                  <SelectItem key={name} value={name} className="hover:bg-sky-100 cursor-pointer">
                     {name}
                   </SelectItem>
                 );
@@ -122,14 +120,14 @@ const JobListing = () => {
           value={company_id}
           onValueChange={(value) => setCompany_id(value)}
         >
-          <SelectTrigger>
+          <SelectTrigger className="bg-white border-sky-300 text-slate-900 focus:ring-sky-500">
             <SelectValue placeholder="Filter by Company" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="bg-white border-sky-200">
             <SelectGroup>
               {companies?.map(({ name, id }) => {
                 return (
-                  <SelectItem key={name} value={id}>
+                  <SelectItem key={name} value={id} className="hover:bg-sky-100 cursor-pointer">
                     {name}
                   </SelectItem>
                 );
@@ -137,9 +135,9 @@ const JobListing = () => {
             </SelectGroup>
           </SelectContent>
         </Select>
+
         <Button
-          className="sm:w-1/2"
-          variant="destructive"
+          className="sm:w-1/2 bg-sky-200 hover:bg-sky-300 text-sky-900"
           onClick={clearFilters}
         >
           Clear Filters
@@ -147,17 +145,20 @@ const JobListing = () => {
       </div>
 
       {loadingJobs && (
-        <BarLoader className="mb-4" width={"100%"} color="#36d7b7" />
+        <BarLoader className="mt-4" width={"100%"} color="#0ea5e9" />
       )}
+
       {loadingJobs === false && (
         <div className="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {
-            jobs?.length ? (jobs.map((job) => {
-              return <JobCard key={job.id} job={job}
-                savedInit={job?.saved?.length > 0} />;
+          {jobs?.length ? (
+            jobs.map((job) => {
+              return <JobCard key={job.id} job={job} savedInit={job?.saved?.length > 0} />;
             })
-            ) : (<div>NO JOBS FOUND </div>)
-          }
+          ) : (
+            <div className="text-slate-600 text-center col-span-full pt-10 text-xl font-medium">
+              No Jobs Found 😢
+            </div>
+          )}
         </div>
       )}
     </div>

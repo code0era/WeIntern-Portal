@@ -7,12 +7,12 @@ const MyJobs = () => {
   const { user, isLoaded } = useUser();
 
   if (!isLoaded) {
-    return <BarLoader className="mb-4" width={"100%"} color="#36d7b7" />;
+    return <BarLoader className="mb-4" width={"100%"} color="#0ea5e9" />;
   }
 
   return (
-    <div>
-      <h1 className="gradient-title font-extrabold text-5xl sm:text-7xl text-center pb-8">
+    <div className="min-h-screen bg-sky-100 p-8">
+      <h1 className="font-extrabold text-5xl sm:text-7xl text-center pb-8 text-slate-900">
         {user?.unsafeMetadata?.role === "candidate"
           ? "My Applications"
           : "My Jobs"}
