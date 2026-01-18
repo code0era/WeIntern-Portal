@@ -112,7 +112,7 @@ const JobPage = () => {
           job={job}
           user={user}
           fetchJob={fnJob}
-          applied={job?.applications?.find((ap) => ap.candidate_id === user.id)}
+          applied={job?.applications?.find((ap) => ap.user_id === user.id)}
         />
       )}
       {loadingHiringStatus && <BarLoader width={"100%"} color="#36d7b7" />}
