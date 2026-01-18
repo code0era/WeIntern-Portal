@@ -3,6 +3,11 @@
 
 # 🚀 WeIntern - Professional Internship & Job Portal
 
+# visit WEINTERN
+
+https://weinternportal.vercel.app/
+
+
 **WeIntern** is a streamlined, responsive job portal platform designed to connect ambitious interns and job seekers with top-tier employers. Featuring a clean, modern **Sky Blue & White** aesthetic, the application provides a seamless experience for managing the entire hiring lifecycle.
 
 # Some Working SS:
@@ -61,24 +66,7 @@ The application has been unified under a professional **Sky Blue / Light Blue / 
 
 ---
 
-## 🐛 4. Critical Logic Fixes
 
-### **The Description Parsing Bug**
-
-A previous version of the `JobCard` component failed to display descriptions if they did not contain a period (`.`).
-
-**The Problem:**
-
-```javascript
-// Resulted in "." only if no dot was found in the text
-job.description.substring(0, job.description.indexOf("."))
-
-```
-
-**The Solution:**
-The logic was updated to check for the existence of a period and provide a fallback truncation length (80 characters) to ensure the card always displays readable content regardless of how the recruiter enters the data.
-
----
 
 ## 📖 5. User Guides
 
@@ -148,4 +136,4 @@ npm run dev
 
 ---
 
-**Would you like me to create a specific `CONTRIBUTING.md` file for you, or do you need help setting up the Supabase database schema for this project?**
+MADE by : CODE0ERA 💖
