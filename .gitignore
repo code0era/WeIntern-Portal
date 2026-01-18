@@ -6,21 +6,33 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-.env
+
+# Dependencies
 node_modules
 dist
 dist-ssr
 *.local
-SureSORT\client\node_modules
-SureSORT\server\node_modules
-WeIntern-Portal\node_modules
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
 .idea
 .DS_Store
 *.suo
-*.ntvs*
+*.ntvs
 *.njsproj
 *.sln
 *.sw?
+
+# Environment Variables (CRITICAL)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Testing
+coverage
+
+# Supabase (if you use CLI)
+supabase/functions/*/deno.lock
