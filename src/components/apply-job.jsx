@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
     Drawer,
@@ -42,8 +41,6 @@ const schema = z.object({
 });
 
 export function ApplyJobDrawer({ user, job, fetchJob, applied = false }) {
-    const [open, setOpen] = useState(false);
-
     const {
         register,
         handleSubmit,
@@ -71,12 +68,11 @@ export function ApplyJobDrawer({ user, job, fetchJob, applied = false }) {
         }).then(() => {
             fetchJob();
             reset();
-            setOpen(false);
         });
     };
 
     return (
-        <Drawer open={applied ? false : open} onOpenChange={setOpen}>
+        <Drawer open={applied ? false : undefined}>
             <DrawerTrigger asChild>
                 <Button
                     size="lg"
