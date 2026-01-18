@@ -79,7 +79,8 @@ const JobCard = ({
                 </div>
                 <hr className="border-sky-100" />
                 <p className="text-sm sm:text-base leading-relaxed">
-                    {job.description.substring(0, job.description.indexOf("."))}.
+                    {/* The Bug Fix is Here */}
+                    {job.description.substring(0, job.description.indexOf(".") !== -1 ? job.description.indexOf(".") : job.description.length)}.
                 </p>
             </CardContent>
             <CardFooter className="flex gap-2">
